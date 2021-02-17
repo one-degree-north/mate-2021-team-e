@@ -1,12 +1,13 @@
 import pygame
 import serial
+pygame.init()
 background_color = (0,0,0)
 width = 300
 height = 300
 screen  = pygame.display.set_mode((width,height))
 screen.fill(background_color)
 running = True
-ser = serial.Serial("dev/tty...", 9600)
+ser = serial.begin("dev/cu.usbserial-1420", 9600)
 while running:
     for event in pygame.event.get():
        if event.type == pygame.QUIT:
