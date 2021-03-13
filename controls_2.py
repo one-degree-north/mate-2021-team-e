@@ -4,8 +4,6 @@ pygame.init()
 screen = pygame.display.set_mode((300,300))
 running = True
 
-ser = serial.begin("dev/cu.usbserial-1420", 9600)
-
 # Test
 if __name__ == '__main__':
     controller = control(100,0.1)
@@ -48,8 +46,9 @@ class control():
                 return  (raw+self.adjustment)/1.0
     def controls_move(self):
         self.running = True
+        ser = serial.begin("dev/cu.usbserial-1420", 9600)
         while running:
-            claw_movement = 99
+           claw_movement = 99
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
                     running = False
