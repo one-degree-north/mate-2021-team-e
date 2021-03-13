@@ -35,8 +35,6 @@ class control():
             up_motor = 0,
             right_motor_right: 0,
         }
-        
-        
         self.controller = pygame.joystick.Joystick(0)
         self.clock = pygame.time.Clock()
 
