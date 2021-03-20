@@ -1,3 +1,10 @@
+import pygame
+import serial
+import sympy
+import numpy
+import matplotlib
+import PySimpleGUI as sg
+import time
 class control():
     def __init__(self, scale, adjustment, running, list_movements, controller, clock, serial_port, serial_baudrate):
         self.scale = scale 
