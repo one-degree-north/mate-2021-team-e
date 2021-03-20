@@ -5,7 +5,15 @@ import numpy
 import matplotlib
 import PySimpleGUI as sg
 import time
-class control():
+class Control():
+    #Creates variables that store the motor labels for the different motors used. Some motor values have also been put in for adjustments that may be made to add the claw          
+    _CENTRAL_MOTOR = 1
+    _RIGHT_MOTOR = 2
+    _LEFT_MOTOR = 3
+    _UP_QUANTITY = 500
+    _RIGHT_QUANTITY = 500
+    _LEFT_QUANTITY = 500
+
     def __init__(self, scale, adjustment, running, list_movements, controller, clock, serial_port, serial_baudrate):
         self.scale = scale 
         self.adjustment = adjustment
@@ -28,11 +36,11 @@ class control():
         
         self.clock = pygame.time.Clock()
         
-        self.serial_port = "dev/ttyUSB0"
+        self.serial_port = "/dev/ttyUSB0"
         
         self.serial_baudrate = 9600
         
-    ser = serial.Serial(port=serial_port, baudrate=serial_baudrate)    
+        self.ser = serial.Serial(port=serial_port, baudrate=serial_baudrate)    
     #Function that scales the movement on the joystick of the XBox Controller to the amount that needs to be moved by the robot
     
     def movement_scaler(self, raw, adjustment):
@@ -44,13 +52,7 @@ class control():
             elif raw < 0:
                 return  (raw+self.adjustment)/1.0       
                 
-    #Creates variables that store the motor labels for the different motors used. Some motor values have also been put in for adjustments that may be made to add the claw          
-    central_motor = 1
-    right_motor = 2
-    left_motor = 3
-    up_quantity = 500
-    right_quantity = 500
-    left_quantity = 500
+
     
     #Correctly encodes the strings that are used to send quantities in order to send them to serial
     def printer(information):
@@ -93,21 +95,20 @@ class control():
                 #The axis labelled 4 is used for up to right motion and is located on the right joystick.
                 elif event.type == pygame.JOYAXISMOTION:
                     input = event.value
-                    scaled_input = movement_scaler(input, 0.2)
-                    right_quantity = scaled_input
+                    right_quantity = movement_scaler(input, 0.2)
                     if event.axis == 0:
                         if right_quantity<0:
                             move_left(right_quantity)
-                            self.list_movement['left_motor_left'] = abs(scaled_input)
+                            self.list_movement['left_motor_left'] = abs(right_quantity)
                         else:
                             move_right(right_quantity)
-                            self.list_movement['left_motor_right'] = scaled_input
+                            self.list_movement['left_motor_right'] = right_quantity
                     elif event.axis == 3:
-                        move_turn(quantity)
-                        self.list_movements['turning_amount'] = scaled_input        
+                        move_turn(right_quantity)
+                        self.list_movements['turning_amount'] = right_quantity       
                     elif event.axis == 4:
                         move_up(right_quantity)
-                        self.list_movements['up_motor'] = scaled_input
+                        self.list_movements['up_motor'] = right_quantity
     #Stops the controller by setting self.running to false                   
     def stop():
         self.running = False
