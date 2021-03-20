@@ -1,3 +1,10 @@
+import pygame
+import serial
+import sympy
+import numpy
+import matplotlib
+import PySimpleGUI as sg
+import time
 class Camera:
     def __init__(self):
         #videos_information will contain the cv2 video capture object
