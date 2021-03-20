@@ -40,7 +40,7 @@ if __name__ == '__main__':
     except:
         print("Unexpected error: ", sys.exc_infor()[0])
         raise
-    if(not camera.video_capture.isOpened()):
+    if not camera.video_capture.isOpened():
         print("Start Cameras")
         SystemExit(0)
     while self.running:
