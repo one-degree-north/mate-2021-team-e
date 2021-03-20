@@ -5,7 +5,7 @@ import numpy
 import matplotlib
 import PySimpleGUI as sg
 import time
-class interface():
+class Interface():
     def __init__(self, robot, object_seen, motor_controls):
         self.robot = None
         self.object_seen = True
