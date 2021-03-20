@@ -1,3 +1,10 @@
+import pygame
+import serial
+import sympy
+import numpy
+import matplotlib
+import PySimpleGUI as sg
+import time
 class interface():
     def __init__(self, robot, object_seen, motor_controls):
         self.robot = None
