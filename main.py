@@ -1,5 +1,27 @@
+def gstreamer_pipeline(sensor_id = 0,sensor_mode = 3,capture_width = 1280,capture_height = 1280,display_width = 1280,display_height = 1280,framerate = 60,flip_method = 0):
+    return("nvarguscamerasrc sensor-id=%d sensor-mode=%d ! "
+    "video/x-raw(memory:NVMM), "
+    "width=(int)%d, height=(int)%d, "
+    "format=(string)NV12, framerate=(fraction)%d/1 ! "
+    "nvvidconv flip-method=%d ! "
+    "video/x-raw, width=(int)%d, height=(int)%d, format=(string)BGRx ! "
+    "videoconvert ! "
+    "video/x-raw, format=(string)BGR ! appsink"
+    % (
+        sensor_id,
+        sensor_mode,
+        capture_width,
+        capture_height,
+        framerate,
+        flip_method,
+        display_width,
+        display_height,
+    ))
+
 if __name__ == '__main__':
     camera = Camera()
+    camera.open(gstreamer_pipeline(sensor_id=0, sensor_mode=3, flip_method=0, display_height=600, display_width=600))
+    camera.start()
     interface = Interface()
     controller = control(100,0.1)
     interface.make_interface() 
