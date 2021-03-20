@@ -16,7 +16,10 @@ while True:
   lines = picture_lines("/Users/nityaarora/Downloads/picture.png")
   lines_video = picture_lines(picture_video)
   region_place_part = region_place(lines, lines_video)
-  draw_picture("/Users/nityaarora/Downloads/picture.png", region_place_part[0], region_place_part[1], region_place_part[2], region_place_part[3])
+  draw_picture("~/Downloads/picture.png", region_place_part[0], region_place_part[1], region_place_part[2], region_place_part[3])
+  
+  
+  
 def picture_lines(pictures):
     img = cv2.imread(pictures)
     picture = cv2.cvtColor(img, cv2.COLOR_BGR2HSV)
@@ -45,6 +48,9 @@ def picture_lines(pictures):
                     if(full_part[i][j][0][0] == reds_part[k][m][0][0] and full_part[i][j][0][1] == reds_part[k][m][0][1]):
                         full.remove(full_part[i][j])
     return ([full_part, reds_part, full])
+  
+  
+  
 def draw_picture(picture, lines_repair, lines_unhealthy, lines_growth, lines_damage):
   
     picture_lines_repair, repair_hierarchy = cv2.drawContours(picture, lines_repair, -1, (255,0,0), 3)
@@ -89,6 +95,9 @@ def region_place(lines, lines_shown):
  
 
 def draw_rectangles(picture, contours, hierarchy):
+  
+  
+  
   height, width, _ = picture.shape
   min_x, min_y = width, height
   max_x = max_y = 0
