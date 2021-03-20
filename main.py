@@ -4,6 +4,7 @@ import sympy
 import numpy
 import matplotlib
 import PySimpleGUI as sg
+from threading import Thread
 import time
 from cameras.py import Camera
 from interface.py import Interface
