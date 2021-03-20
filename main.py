@@ -32,7 +32,7 @@ if __name__ == '__main__':
     camera = Camera()
     camera.open(gstreamer_pipeline(sensor_id=0, sensor_mode=3, flip_method=0, display_height=600, display_width=600))
     camera.start()
-    interface = Interface()
+    interface = Interface(robot=camera.list_movements, object_seen=True, motor_controls=True)
     controller = control(100,0.1)
     interface.make_interface() 
     try:
