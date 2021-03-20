@@ -78,8 +78,12 @@ class control():
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
                     running = False
-                #The buttons are used to control the leftward, rightward, and other motions of the claw. These have not been considered yet since the claw and its motor have not been mounted. That is why the code is commented out for now.
-                #The joy axes are used to control the motion of the robot forward, leftward, rightward, and to allow the robot to turn as well. The axis labelled 0 is used for left to right motion and is located on the left joystick. The axis labelled 4 is used for up to right motion and is located on the right joystick.
+                #The buttons are used to control the leftward, rightward, and other motions of the claw. 
+                #These have not been considered yet since the claw and its motor have not been mounted. 
+                #I took the code for the claws out since we are not using those buttons yet
+                #The joy axes are used to control the motion of the robot forward, leftward, rightward, and to allow the robot to turn as well. 
+                #The axis labelled 0 is used for left to right motion and is located on the left joystick. 
+                #The axis labelled 4 is used for up to right motion and is located on the right joystick.
                 elif event.type == pygame.JOYAXISMOTION:
                     input = event.value
                     scaled_input = movement_scaler(input, 0.2)
@@ -100,3 +104,7 @@ class control():
     #Stops the controller by setting self.running to false                   
     def stop():
         self.running = False
+
+
+
+        
