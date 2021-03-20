@@ -23,7 +23,7 @@ class Interface():
         self.speed_graph_layout = [[sg.Text("Speeds Graphs", size=(60,60), justification="center")], [sg.Image(filename="graph.png", key="graphs")]]
         self.layout = [camera_layout, speed_graph_layout]
         self.window = sg.Window(title="Interface", layout=layout, return_keyboard_events=True,location=(600,600))
-        
+    #update_interface puts the incoming pictures on the interface to show video output    
     def update_interface(self, cameraFrameSize, graphFrameSize, videoFrames):
         self.running = True
         self.cameraFrameSize = cameraFrameSize
