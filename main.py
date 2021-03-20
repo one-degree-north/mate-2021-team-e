@@ -33,7 +33,7 @@ if __name__ == '__main__':
     controller = control(100,0.1)
     interface.make_interface() 
     try:
-        controls_move()
+        controller.controls_move()
         print("Controller is working")
     except KeyboardInterrupt:
         print("Stop")
