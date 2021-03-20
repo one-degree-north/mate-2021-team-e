@@ -95,20 +95,20 @@ class Control():
                 #The axis labelled 4 is used for up to right motion and is located on the right joystick.
                 elif event.type == pygame.JOYAXISMOTION:
                     input = event.value
-                    right_quantity = movement_scaler(input, 0.2)
+                    _RIGHT_QUANTITY = movement_scaler(input, 0.2)
                     if event.axis == 0:
-                        if right_quantity<0:
-                            move_left(right_quantity)
-                            self.list_movement['left_motor_left'] = abs(right_quantity)
+                        if _RIGHT_QUANTITY<0:
+                            move_left(_RIGHT_QUANTITY)
+                            self.list_movement['left_motor_left'] = abs(_RIGHT_QUANTITY)
                         else:
-                            move_right(right_quantity)
-                            self.list_movement['left_motor_right'] = right_quantity
+                            move_right(_RIGHT_QUANTITY)
+                            self.list_movement['left_motor_right'] = _RIGHT_QUANTITY
                     elif event.axis == 3:
-                        move_turn(right_quantity)
-                        self.list_movements['turning_amount'] = right_quantity       
+                        move_turn(_RIGHT_QUANTITY)
+                        self.list_movements['turning_amount'] = _RIGHT_QUANTITY       
                     elif event.axis == 4:
-                        move_up(right_quantity)
-                        self.list_movements['up_motor'] = right_quantity
+                        move_up(_RIGHT_QUANTITY)
+                        self.list_movements['up_motor'] = _RIGHT_QUANTITY
     #Stops the controller by setting self.running to false                   
     def stop():
         self.running = False
