@@ -5,6 +5,9 @@ import numpy
 import matplotlib
 import PySimpleGUI as sg
 import time
+from cameras.py import Camera
+from interface.py import Interface
+from controls.py import Control
 def gstreamer_pipeline(sensor_id = 0,sensor_mode = 3,capture_width = 1280,capture_height = 1280,display_width = 1280,display_height = 1280,framerate = 60,flip_method = 0):
     return("nvarguscamerasrc sensor-id=%d sensor-mode=%d ! "
     "video/x-raw(memory:NVMM), "
