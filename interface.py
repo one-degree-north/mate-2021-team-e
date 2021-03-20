@@ -5,6 +5,7 @@ import numpy
 import matplotlib
 import PySimpleGUI as sg
 import time
+from threading import Thread
 
 class Interface():
     
@@ -38,3 +39,5 @@ class Interface():
             frame_grayversion = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
             images_bytess = cv2.imencode(".png", frame_grayversion)[1].tobytes()
             window["camera"].update(data=images_bytess)
+    thread = Thread(target=update_interface)
+    thread.start()
