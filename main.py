@@ -4,6 +4,7 @@ import sympy
 import numpy
 import matplotlib
 import PySimpleGUI as sg
+from threading import Thread
 import time
 from cameras.py import Camera
 from interface.py import Interface
@@ -49,8 +50,9 @@ if __name__ == '__main__':
     while self.running:
         _, camera_picture = camera.read()
         camera_pictures = np.hstack((camera_picture))
-        interface.update_interface(cameraFrameSize=(600,600), graphFrameSize=(600,600),videoFrames=camera_pictures)
-
+        thread = Thread(target=interface.update_interface(cameraFrameSize=(600,600), videoFrames=camera_pictures))
+        thread.start()
+        
         camera.stop()
         camera.release()
     
