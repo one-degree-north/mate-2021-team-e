@@ -5,6 +5,7 @@ import numpy
 import matplotlib
 import PySimpleGUI as sg
 import time
+
 class Control():
     #Creates variables that store the motor labels for the different motors used. Some motor values have also been put in for adjustments that may be made to add the claw          
     _CENTRAL_MOTOR = 1
