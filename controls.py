@@ -36,9 +36,9 @@ class Control():
         
         self.clock = pygame.time.Clock()
         
-        self.serial_port = "/dev/ttyUSB0"
+        self.serial_port = serial_port
         
-        self.serial_baudrate = 9600
+        self.serial_baudrate = serial_baudrate
         
         self.ser = serial.Serial(port=serial_port, baudrate=serial_baudrate)    
     #Function that scales the movement on the joystick of the XBox Controller to the amount that needs to be moved by the robot
