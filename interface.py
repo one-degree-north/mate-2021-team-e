@@ -18,12 +18,12 @@ class Interface():
     #make_interface makes the user interface that will use information parsed through from the camera 
     #and the controls in order to make information about the robot's speed, acceleration, and other measurements available
     def make_interface(self):
-        
         self.camera_layout = [[sg.Text(title="Camera", size=(60,60), justification="center")], [sg.Image(filename="", key="camera")]]
         self.camera_column = sg.Column(camera_layout, element_justification="center")
         self.speed_graph_layout = [[sg.Text("Speeds Graphs", size=(60,60), justification="center")], [sg.Image(filename="graph.png", key="graphs")]]
         self.layout = [camera_layout, speed_graph_layout]
         self.window = sg.Window(title="Interface", layout=layout, return_keyboard_events=True,location=(600,600))
+        
     #update_interface puts the incoming pictures on the interface to show video output    
     def update_interface(self, cameraFrameSize, graphFrameSize, videoFrames):
         self.running = True
