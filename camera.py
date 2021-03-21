@@ -5,6 +5,8 @@ import numpy
 import matplotlib
 import PySimpleGUI as sg
 import time
+import cv2
+
 class Camera:
     
     def __init__(self):
