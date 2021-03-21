@@ -6,9 +6,10 @@ import matplotlib
 import PySimpleGUI as sg
 from threading import Thread
 import time
-from cameras.py import Camera
-from interface.py import Interface
-from controls.py import Control
+from camera import Camera
+from interface import Interface
+from controls import Control
+
 def gstreamer_pipeline(sensor_id = 0,sensor_mode = 3,capture_width = 1280,capture_height = 1280,display_width = 1280,display_height = 1280,framerate = 60,flip_method = 0):
     return("nvarguscamerasrc sensor-id=%d sensor-mode=%d ! "
     "video/x-raw(memory:NVMM), "
@@ -52,12 +53,9 @@ if __name__ == '__main__':
         camera_pictures = np.hstack((camera_picture))
         thread = Thread(target=interface.update_interface(cameraFrameSize=(600,600), videoFrames=camera_pictures))
         thread.start()
-        
         camera.stop()
         camera.release()
     
     
-
     
-
     
