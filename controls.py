@@ -34,7 +34,13 @@ class Control():
         
         self.controller = pygame.joystick.Joystick(0)
         #Sets up the timing for the interface
+        self.A = controller.get_button(0)
+        self.B = controller.get_button(1)
+        self.X = controller.get_button(2)
+        self.Y = controller.get_button(3)
         
+        self.left_joystick = (self.movement_scaler(controller.get_axis(0)), self.movement_scaler(controller.get_axis(2)))
+        self.right_joystick = (self.movement_scaler(controller.get_axis(1)), self.movement_scaler(controller.get_axis(3)))
         self.clock = pygame.time.Clock()
         
         self.serial_port = serial_port
@@ -52,9 +58,7 @@ class Control():
                 return (raw-self.adjustment)/1.0
             elif raw < 0:
                 return  (raw+self.adjustment)/1.0       
-                
-
-    
+               
     #Correctly encodes the strings that are used to send quantities in order to send them to serial
     def printer(information):
         ser.write(information.encode('latin'))
@@ -79,7 +83,8 @@ class Control():
     def move_turn(quantity):
         printer("" + right_motor + "\n" + quantity + "\n")
         printer("" + left_motor + "\n" + -1*quantity + "\n")
-        
+       
+
     #Starts controls and sets up event responses to control movements on the controller
     def controls_move(self):
         self.running = True
@@ -113,7 +118,4 @@ class Control():
     #Stops the controller by setting self.running to false                   
     def stop():
         self.running = False
-
-
-
         
