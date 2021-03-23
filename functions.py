@@ -10,10 +10,10 @@ class interfaceInformation():
     self.clock = clock
     self.start_time = clock.time.time() #There will be a little bit of lag since this function will be called after interface is called
    
-  def speed_estimates(self, C_d, rau, frontal_area, andgle_of_attack):
-    self.speed_left = math.sqrt((2*self.robot["left_motor"])/(C_d*rau*frontal_area*sin(angle_of_attack)))
-    self.speed_right = math.sqrt((2*self.robot["right_motor"])/(C_d*rau*frontal_area*sin(angle_of_attack)))
-    self.speed_up = math.sqrt((2*self.robot["up_motor"])/(C_d*rau*frontal_area*sin(angle_of_attack))
+  def speed_estimates(self, C_d, density, frontal_area, andgle_of_attack):
+    self.speed_left = math.sqrt((2*self.robot["left_motor"])/(C_d*density*frontal_area*sin(angle_of_attack)))
+    self.speed_right = math.sqrt((2*self.robot["right_motor"])/(C_d*density*frontal_area*sin(angle_of_attack)))
+    self.speed_up = math.sqrt((2*self.robot["up_motor"])/(C_d*density*frontal_area*sin(angle_of_attack))
     
     magnitude = math.sqrt((self.speed_left)**2 + (self.speed_right)**2 + (self.speed_up)**2)
     return [magnitude, self.speed_left, self.speed_right, self.speed_up]
@@ -22,11 +22,11 @@ class interfaceInformation():
   def angular_position_arrays(self):
   
     time_start = self.clock.time.time()
-    tdata = np.linspace(0,10,11)
+    tdata = np.linspace(0,6,11)
     self.move_angle = self.robot["move_turn"]
     time_new = self.clock.time.time()
     velocity_data = []
-    while len(velocity_data)<10 and time_new-time_start < 10:
+    while len(velocity_data)<6 and time_new-time_start < 6:
       velocity_data.append(self.move_angle)
       time_new = self.clock.time.time()
     velocity_found = velocity_data
