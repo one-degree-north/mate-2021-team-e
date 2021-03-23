@@ -51,7 +51,7 @@ if __name__ == '__main__':
     while self.running:
         _, camera_picture = camera.read()
         camera_pictures = np.hstack((camera_picture))
-        thread = Thread(target=interface.update_interface(cameraFrameSize=(600,600), videoFrames=camera_pictures))
+        thread = Thread(target=update_interface, args=(cameraFrameSize=(600,600), videoFrames=camera_pictures,))
         thread.start()
         camera.stop()
         camera.release()
