@@ -124,7 +124,8 @@ class Interface():
             event, values = window.read()
             if event == sg.WIN_CLOSED or event == "EXIT":
                 self.running = False
-           
+
+                
             frame = cv2.resize(videoFrames, self.graphFrameSize)
             frame_grayversion = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
             images_bytess = cv2.imencode(".png", frame_grayversion)[1].tobytes()
