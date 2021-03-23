@@ -34,8 +34,8 @@ if __name__ == '__main__':
     camera = Camera()
     camera.open(gstreamer_pipeline(sensor_id=0, sensor_mode=3, flip_method=0, display_height=600, display_width=600))
     camera.start()
-    interface = Interface(robot=camera.list_movements, object_seen=True, motor_controls=True)
     controller = Control(100,0.1)
+    interface = Interface(robot=controller.list_movements, object_seen=True, motor_controls=True)
     interface.make_interface() 
     try:
         controller.controls_move()
@@ -48,14 +48,15 @@ if __name__ == '__main__':
     if not camera.video_capture.isOpened():
         print("Start Cameras")
         SystemExit(0)
+    thread = Thread(target=update_interface, args=(cameraFrameSize=(600,600), videoFrames=camera_pictures,))
+    thread.start()
     while self.running:
+        #Put interface update here
         _, camera_picture = camera.read()
         camera_pictures = np.hstack((camera_picture))
-        thread = Thread(target=update_interface, args=(cameraFrameSize=(600,600), videoFrames=camera_pictures,))
-        thread.start()
         camera.stop()
         camera.release()
-    
+    thread.join()
     
     
     
