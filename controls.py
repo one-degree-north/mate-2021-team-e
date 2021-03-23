@@ -11,9 +11,6 @@ class Control():
     _CENTRAL_MOTOR = 1
     _RIGHT_MOTOR = 2
     _LEFT_MOTOR = 3
-    _UP_QUANTITY = 500
-    _RIGHT_QUANTITY = 500
-    _LEFT_QUANTITY = 500
 
     def __init__(self, scale, adjustment, running, list_movements, controller, clock, serial_port, serial_baudrate):
         self.scale = scale 
@@ -101,20 +98,20 @@ class Control():
                 #The axis labelled 4 is used for up to right motion and is located on the right joystick.
                 elif event.type == pygame.JOYAXISMOTION:
                     input = event.value
-                    _RIGHT_QUANTITY = movement_scaler(input, 0.2)
+                    amount = movement_scaler(input, 0.2)
                     if event.axis == 0:
-                        if _RIGHT_QUANTITY<0:
-                            move_left(_RIGHT_QUANTITY)
-                            self.list_movement['left_motor_left'] = abs(_RIGHT_QUANTITY)
+                        if amount<0:
+                            move_left(amount)
+                            self.list_movement['left_motor_left'] = abs(amount)
                         else:
-                            move_right(_RIGHT_QUANTITY)
-                            self.list_movement['left_motor_right'] = _RIGHT_QUANTITY
+                            move_right(amount)
+                            self.list_movement['left_motor_right'] = amount
                     elif event.axis == 3:
-                        move_turn(_RIGHT_QUANTITY)
-                        self.list_movements['turning_amount'] = _RIGHT_QUANTITY       
+                        move_turn(amount)
+                        self.list_movements['turning_amount'] = amount      
                     elif event.axis == 4:
-                        move_up(_RIGHT_QUANTITY)
-                        self.list_movements['up_motor'] = _RIGHT_QUANTITY
+                        move_up(amount)
+                        self.list_movements['up_motor'] = amount
     #Stops the controller by setting self.running to false                   
     def stop():
         self.running = False
