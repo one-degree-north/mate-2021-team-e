@@ -48,7 +48,7 @@ if __name__ == '__main__':
     if not camera.video_capture.isOpened():
         print("Start Cameras")
         SystemExit(0)
-    thread = Thread(target=update_interface, args=(cameraFrameSize=(600,600), videoFrames=camera_pictures,))
+    thread = Thread(target=interface.update_interface, args=((600,600),camera_pictures))
     thread.start()
     while self.running:
         #Put interface update here
