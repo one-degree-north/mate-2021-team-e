@@ -22,11 +22,11 @@ class interfaceInformation():
   def angular_position_arrays(self):
   
     time_start = self.clock.time.time()
-    tdata = np.linspace(0,6,11)
+    tdata = np.linspace(0,1,11)
     self.move_angle = self.robot["move_turn"]
     time_new = self.clock.time.time()
     velocity_data = []
-    while len(velocity_data)<6 and time_new-time_start < 6:
+    while len(velocity_data)<6 and time_new-time_start < 1:
       velocity_data.append(self.move_angle)
       time_new = self.clock.time.time()
     velocity_found = velocity_data
