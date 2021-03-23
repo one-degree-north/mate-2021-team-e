@@ -10,6 +10,7 @@ from camera import Camera
 from interface import Interface
 from controls import Control
 
+
 def gstreamer_pipeline(sensor_id = 0,sensor_mode = 3,capture_width = 1280,capture_height = 1280,display_width = 1280,display_height = 1280,framerate = 60,flip_method = 0):
     return("nvarguscamerasrc sensor-id=%d sensor-mode=%d ! "
     "video/x-raw(memory:NVMM), "
