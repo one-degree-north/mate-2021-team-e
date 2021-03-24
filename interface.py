@@ -98,7 +98,7 @@ class Interface():
         global power
         global t
         
-        angular_position = angular_positon.append(self.information.angular_position_changer(angular_position_arrays[1])))
+        angular_position = angular_positon.append(self.information.angular_position_changer(angular_position_arrays[1]))
         velocity = velocity.append(self.information.speeds_estimates())
         left_power = self.robot["left_motor"]
         right_power = self.robot["right_motor"]
