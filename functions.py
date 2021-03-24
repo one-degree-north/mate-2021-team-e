@@ -13,7 +13,7 @@ class interfaceInformation():
   def speed_estimates(self, C_d, density, frontal_area, angle_of_attack):
     self.speed_left = math.sqrt((2*self.robot["left_motor"])/(C_d*density*frontal_area*sin(angle_of_attack)))
     self.speed_right = math.sqrt((2*self.robot["right_motor"])/(C_d*density*frontal_area*sin(angle_of_attack)))
-    self.speed_up = math.sqrt((2*self.robot["up_motor"])/(C_d*density*frontal_area*sin(angle_of_attack))
+    self.speed_up = math.sqrt((2*self.robot["up_motor"])/(C_d*density*frontal_area*sin(angle_of_attack)))
     
     magnitude = math.sqrt((self.speed_left)**2 + (self.speed_right)**2 + (self.speed_up)**2)
     return [magnitude, self.speed_left, self.speed_right, self.speed_up]
