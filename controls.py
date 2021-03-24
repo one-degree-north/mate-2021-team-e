@@ -12,7 +12,7 @@ class Control():
     _RIGHT_MOTOR = 2
     _LEFT_MOTOR = 3
 
-    def __init__(self, scale, adjustment, running, list_movements, controller, clock, serial_port, serial_baudrate):
+    def __init__(self, scale, adjustment):
         self.scale = scale 
         self.adjustment = adjustment
         self.running = False
