@@ -17,18 +17,18 @@ class Control():
         self.adjustment = adjustment
         self.running = False
         self.list_movements = {
-            abutton: 0,
-            bbutton: 0,
-            xbutton: 0,
-            ybutton: 0,
-            left_motor_right: 0,
-            up_motor : 0,
-            right_motor_right: 0,
-            turning_amount: 0
+            'abutton': 0,
+            'bbutton': 0,
+            'xbutton': 0,
+            'ybutton': 0,
+            'left_motor_right': 0,
+            'up_motor' : 0,
+            'right_motor_right': 0,
+            'turning_amount': 0
         }
         
         #Initializes the joystick being used, which is the XBox Controller
-        
+        pygame.init()
         self.controller = pygame.joystick.Joystick(0)
         #Sets up the timing for the interface
         self.A = controller.get_button(0)
