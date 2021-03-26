@@ -29,12 +29,24 @@ class Control():
         
         #Initializes the joystick being used, which is the XBox Controller
         pygame.init()
-        self.controller = pygame.joystick.Joystick(0)
+        joysticks = []
+        joystick_count = pygame.joystick.get_count()
+        for i in range(joystick_count):
+            joysticks.append(pygame.joystick.Joystick(i))
+            joysticks[i].init()
+            try:
+                jid = joystick.get_instance_id()
+            except AttributeError:
+                # get_instance_id() is an SDL2 method
+                jid = joystick.get_id()
+                return AttributeError
+         self.controller = joysticks[0]                              
+        
         #Sets up the timing for the interface
-        self.A = controller.get_button(0)
-        self.B = controller.get_button(1)
-        self.X = controller.get_button(2)
-        self.Y = controller.get_button(3)
+        self.A = self.controller.get_button(0)
+        self.B = self.controller.get_button(1)
+        self.X = self.controller.get_button(2)
+        self.Y = self.controller.get_button(3)
         
         self.left_joystick = (self.movement_scaler(controller.get_axis(0)), self.movement_scaler(controller.get_axis(2)))
         self.right_joystick = (self.movement_scaler(controller.get_axis(1)), self.movement_scaler(controller.get_axis(3)))
