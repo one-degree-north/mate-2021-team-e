@@ -65,10 +65,8 @@ class Interface():
         angular_position=zeros(0)
         velocity=zeros(0)
         power=zeros(0)
-        #
         t=zeros(0)
-
-        # set plots
+        
         p011, = graph_angular_position_ax.plot(t,angular_position,'b-', label="Angular Position")
         
 
