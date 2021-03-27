@@ -31,32 +31,35 @@ class Control():
         pygame.init()
         joysticks = []
         joystick_count = pygame.joystick.get_count()
-        for i in range(joystick_count):
-            joysticks.append(pygame.joystick.Joystick(i))
-            joysticks[i].init()
-            try:
-                jid = joystick.get_instance_id()
-            except AttributeError:
-                # get_instance_id() is an SDL2 method
-                jid = joystick.get_id()
-                return AttributeError
-         self.controller = joysticks[0]                              
-        
-        #Sets up the timing for the interface
-        self.A = self.controller.get_button(0)
-        self.B = self.controller.get_button(1)
-        self.X = self.controller.get_button(2)
-        self.Y = self.controller.get_button(3)
-        
-        self.left_joystick = (self.movement_scaler(controller.get_axis(0)), self.movement_scaler(controller.get_axis(2)))
-        self.right_joystick = (self.movement_scaler(controller.get_axis(1)), self.movement_scaler(controller.get_axis(3)))
-        self.clock = pygame.time.Clock()
-        
-        self.serial_port = serial_port
-        
-        self.serial_baudrate = serial_baudrate
-        
-        self.ser = serial.Serial(port=serial_port, baudrate=serial_baudrate)    
+        if joystick_count == 0:
+            print("Connect Joystick")
+        else:
+            for i in range(joystick_count):
+                joysticks.append(pygame.joystick.Joystick(i))
+                joysticks[i].init()
+                try:
+                    jid = joystick.get_instance_id()
+                except AttributeError:
+                    # get_instance_id() is an SDL2 method
+                    jid = joystick.get_id()
+                    return AttributeError
+            self.controller = joysticks[0]                              
+
+            #Sets up the timing for the interface
+            self.A = self.controller.get_button(0)
+            self.B = self.controller.get_button(1)
+            self.X = self.controller.get_button(2)
+            self.Y = self.controller.get_button(3)
+
+            self.left_joystick = (self.movement_scaler(controller.get_axis(0)), self.movement_scaler(controller.get_axis(2)))
+            self.right_joystick = (self.movement_scaler(controller.get_axis(1)), self.movement_scaler(controller.get_axis(3)))
+            self.clock = pygame.time.Clock()
+
+            self.serial_port = serial_port
+
+            self.serial_baudrate = serial_baudrate
+
+            self.ser = serial.Serial(port=serial_port, baudrate=serial_baudrate)    
     #Function that scales the movement on the joystick of the XBox Controller to the amount that needs to be moved by the robot
     
     def movement_scaler(self, raw, adjustment):
