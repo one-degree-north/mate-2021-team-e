@@ -8,7 +8,6 @@ import PySimpleGUI as sg
 import time
 from threading import Thread
 import matplotlib.animation as animation
-from plt import figure
 from functions import interfaceInformation
 matplotlib.use("TkAgg")
 
