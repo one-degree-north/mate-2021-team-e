@@ -3,6 +3,7 @@ import serial
 import sympy
 import numpy
 import matplotlib
+import matplotlib.pyplot as plt
 import PySimpleGUI as sg
 import time
 from threading import Thread
@@ -10,6 +11,7 @@ import matplotlib.animation as animation
 from plt import figure
 from functions import interfaceInformation
 matplotlib.use("TkAgg")
+
 class Interface():
     
     def __init__(self, robot, object_seen, motor_controls, clock):
