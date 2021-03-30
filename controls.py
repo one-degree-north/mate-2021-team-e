@@ -12,7 +12,7 @@ class Control():
     _RIGHT_MOTOR = 2
     _LEFT_MOTOR = 3
 
-    def __init__(self, scale, adjustment):
+    def __init__(self, scale, adjustment, clock):
         self.scale = scale 
         self.adjustment = adjustment
         self.running = False
@@ -53,7 +53,7 @@ class Control():
 
             self.left_joystick = (self.movement_scaler(controller.get_axis(0)), self.movement_scaler(controller.get_axis(2)))
             self.right_joystick = (self.movement_scaler(controller.get_axis(1)), self.movement_scaler(controller.get_axis(3)))
-            self.clock = pygame.time.Clock()
+            self.clock = clock
 
             self.serial_port = serial_port
 
