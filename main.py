@@ -13,7 +13,7 @@ screen.fill(BACKGROUND)
 
 active = True
 
-PORT_NAME = "/dev/ttyUSB0"
+PORT_NAME = "/dev/ttyUSB1"
 BAUD_RATE = 9600
 
 ser = serial.Serial(port=PORT_NAME, baudrate=BAUD_RATE)
@@ -39,6 +39,16 @@ def move_forward(val):
     print(msg2, end="")
     write_msg(msg1)
     write_msg(msg2)
+
+def turn_left(val):
+    msg = "3\n" + str(val) + "\n"
+    print(msg, end="")
+    write_msg(msg)
+
+def turn_right(val):
+    msg = "1\n" + str(val) + "\n"
+    print(msg, end="")
+    write_msg(msg)
 
 def move_up(val):
     msg = "2\n" + str(val) + "\n"
@@ -68,6 +78,10 @@ while active:
                 move_up(300)
             if event.key == pygame.K_LSHIFT:
                 move_up(-300)
+            if event.key == pygame.K_a:
+                turn_right(300)
+            if event.key == pygame.K_d:
+                turn_left(300)
         if event.type == pygame.KEYUP:
             if event.key == pygame.K_w:
                 move_forward(0)
@@ -77,6 +91,10 @@ while active:
                 move_up(0)
             if event.key == pygame.K_LSHIFT:
                 move_up(0)
+            if event.key == pygame.K_a:
+                turn_right(0)
+            if event.key == pygame.K_d:
+                turn_left(0)
 
 t.join()
 ser.close()
