@@ -4,7 +4,8 @@ import matplotlib
 import matplotlib.pyplot as plt
 import numpy as np
 from scipy.optimize import curve_fit
-class interfaceInformation():
+
+class InterfaceInformation():
   #Initialize with the clock system of the interface and robot
   def __init__(self, clock): 
     self.clock = clock
