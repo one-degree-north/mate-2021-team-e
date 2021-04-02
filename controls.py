@@ -49,13 +49,6 @@ class Control():
 
             #Sets up the timing for the interface
             self.clock = clock
-            self.A = self.controller.get_button(0)
-            self.B = self.controller.get_button(1)
-            self.X = self.controller.get_button(2)
-            self.Y = self.controller.get_button(3)
-
-            self.left_joystick = (self.movement_scaler(self.controller.get_axis(0)), self.movement_scaler(self.controller.get_axis(2)))
-            self.right_joystick = (self.movement_scaler(self.controller.get_axis(1)), self.movement_scaler(self.controller.get_axis(3)))
 
             self.serial_port = serial_port
 
