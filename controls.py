@@ -9,7 +9,7 @@ import time
 class Control():
     #Creates variables that store the motor labels for the different motors used. Some motor values have also been put in for adjustments that may be made to add the claw          
 
-    def __init__(self, scale, adjustment, clock):
+    def __init__(self, scale, adjustment, clock, serial_port, serial_baudrate):
         self._CENTRAL_MOTOR = 1
         self._RIGHT_MOTOR = 2
         self._LEFT_MOTOR = 3
