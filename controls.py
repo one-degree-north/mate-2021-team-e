@@ -78,24 +78,24 @@ class Control():
         
     #Moves the robot upward by putting the central motor on higher output
     def move_up(quantity):
-        printer("" + central_motor + "\n" + quantity + "\n")
+        printer("" + _CENTRAL_MOTOR + "\n" + quantity + "\n")
         
     #Moves the robot leftward by putting the left motor on higher output
     def move_left(quantity):
-        printer("" + left_motor + "\n" + quantity + "\n")
+        printer("" + _LEFT_MOTOR + "\n" + quantity + "\n")
         
     #Moves the robot rightward by putting the right motor on higher output
     def move_right(quantity):
-        printer("" + right_motor +  "\n" + quantity + "\n")
+        printer("" + _RIGHT_MOTOR +  "\n" + quantity + "\n")
         
     #Moves the robot to the front by putting the right motor and the left motor on higher output
     def move_front(quantity):
-        printer("" + right_motor + "\n" + quantity + "\n")
-        printer("" + left_motor + "\n" + quantity + "\n")
+        printer("" + _RIGHT_MOTOR + "\n" + quantity + "\n")
+        printer("" + _LEFT_MOTOR + "\n" + quantity + "\n")
     #Turns the robot in some direction with the power output provided    
     def move_turn(quantity):
-        printer("" + right_motor + "\n" + quantity + "\n")
-        printer("" + left_motor + "\n" + -1*quantity + "\n")
+        printer("" + _RIGHT_MOTOR + "\n" + quantity + "\n")
+        printer("" + _LEFT_MOTOR + "\n" + -1*quantity + "\n")
        
 
     #Starts controls and sets up event responses to control movements on the controller
