@@ -105,7 +105,7 @@ class Control():
                     running = False
                 elif event.type == pygame.JOYAXISMOTION:
                     if event.axis == 0:
-                        input_move = event.get_axis(0)
+                        input_move = self.controller.get_axis(0)
                         amount = movement_scaler(input_move, 0.2)
                         if amount<0:
                             move_left(amount)
@@ -114,12 +114,12 @@ class Control():
                             move_right(amount)
                             self.list_movements['left_motor_right'] += amount
                     elif event.axis == 3:
-                        input_move = event.get_axis(3)
+                        input_move = self.controller.get_axis(3)
                         amount = movement_scaler(input_move, 0.2)
                         move_turn(amount)
                         self.list_movements['turning_amount'] += amount      
                     elif event.axis == 4:
-                        input_move = event.get_axis(4)
+                        input_move = self.controller.get_axis(4)
                         amount = movement_scaler(input_move, 0.2)
                         move_up(amount)
                         self.list_movements['up_motor'] += amount
