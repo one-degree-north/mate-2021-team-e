@@ -48,6 +48,7 @@ class Control():
             self.controller = joysticks[0]                              
 
             #Sets up the timing for the interface
+            self.clock = clock
             self.A = self.controller.get_button(0)
             self.B = self.controller.get_button(1)
             self.X = self.controller.get_button(2)
