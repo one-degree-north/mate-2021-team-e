@@ -40,10 +40,10 @@ class Control():
                 joysticks.append(pygame.joystick.Joystick(i))
                 joysticks[i].init()
                 try:
-                    jid = joystick.get_instance_id()
+                    jid = joysticks[i].get_instance_id()
                 except AttributeError:
                     # get_instance_id() is an SDL2 method
-                    jid = joystick.get_id()
+                    jid = joysticks[i].get_id()
                     return AttributeError
             self.controller = joysticks[0]                              
 
