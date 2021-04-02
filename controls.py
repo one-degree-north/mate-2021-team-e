@@ -8,11 +8,11 @@ import time
 
 class Control():
     #Creates variables that store the motor labels for the different motors used. Some motor values have also been put in for adjustments that may be made to add the claw          
-    _CENTRAL_MOTOR = 1
-    _RIGHT_MOTOR = 2
-    _LEFT_MOTOR = 3
 
     def __init__(self, scale, adjustment, clock):
+        self._CENTRAL_MOTOR = 1
+        self._RIGHT_MOTOR = 2
+        self._LEFT_MOTOR = 3
         self.scale = scale 
         self.adjustment = adjustment
         self.running = False
@@ -63,7 +63,7 @@ class Control():
         else:
             if raw > 0:
                 return (raw-self.adjustment)/1.0
-            elif raw < 0:
+            if raw < 0:
                 return  (raw+self.adjustment)/1.0       
                
     #Correctly encodes the strings that are used to send quantities in order to send them to serial
@@ -71,25 +71,32 @@ class Control():
         ser.write(information.encode('latin'))
         
     #Moves the robot upward by putting the central motor on higher output
-    def move_up(quantity):
-        printer("" + _CENTRAL_MOTOR + "\n" + quantity + "\n")
+    def move_up(self, quantity):
+        msg = "" + str(self._CENTRAL_MOTOR) + "\n" + str(quantity) + "\n")
+        self.printer(msg)
         
     #Moves the robot leftward by putting the left motor on higher output
-    def move_left(quantity):
-        printer("" + _LEFT_MOTOR + "\n" + quantity + "\n")
+    def move_left(self, quantity):
+        msg = "" + str(self._LEFT_MOTOR) + "\n" + str(quantity) + "\n")
+        self.printer(msg)
         
     #Moves the robot rightward by putting the right motor on higher output
-    def move_right(quantity):
-        printer("" + _RIGHT_MOTOR +  "\n" + quantity + "\n")
+    def move_right(self, quantity):
+        msg = "" + str(self._RIGHT_MOTOR) +  "\n" + str(quantity) + "\n")
+        self.printer(msg)
         
     #Moves the robot to the front by putting the right motor and the left motor on higher output
-    def move_front(quantity):
-        printer("" + _RIGHT_MOTOR + "\n" + quantity + "\n")
-        printer("" + _LEFT_MOTOR + "\n" + quantity + "\n")
+    def move_front(self, quantity):
+        msg1 = "" + str(self._RIGHT_MOTOR) + "\n" + str(quantity) + "\n")
+        msg2 = "" + str(self._LEFT_MOTOR) + "\n" + str(quantity) + "\n")
+        self.printer(msg1)
+        self.printer(msg2)
     #Turns the robot in some direction with the power output provided    
-    def move_turn(quantity):
-        printer("" + _RIGHT_MOTOR + "\n" + quantity + "\n")
-        printer("" + _LEFT_MOTOR + "\n" + -1*quantity + "\n")
+    def move_turn(self, quantity):
+        msg1 = "" + str(self._RIGHT_MOTOR) + "\n" + str(quantity) + "\n")
+        msg2 = "" + str(self._LEFT_MOTOR) + "\n" + str(-1*quantity) + "\n")
+        self.printer(msg1)
+        self.printer(msg2)
        
 
     #Starts controls and sets up event responses to control movements on the controller
@@ -103,25 +110,25 @@ class Control():
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
                     running = False
-                elif event.type == pygame.JOYAXISMOTION:
+                if event.type == pygame.JOYAXISMOTION:
                     if event.axis == 0:
                         input_move = self.controller.get_axis(0)
-                        amount = movement_scaler(input_move, 0.2)
+                        amount = self.movement_scaler(input_move, 0.2)
                         if amount<0:
-                            move_left(amount)
+                            self.move_left(amount)
                             self.list_movements['left_motor_left'] += abs(amount)
                         else:
-                            move_right(amount)
+                            self.move_right(amount)
                             self.list_movements['left_motor_right'] += amount
-                    elif event.axis == 3:
+                    if event.axis == 3:
                         input_move = self.controller.get_axis(3)
-                        amount = movement_scaler(input_move, 0.2)
-                        move_turn(amount)
+                        amount = self.movement_scaler(input_move, 0.2)
+                        self.move_turn(amount)
                         self.list_movements['turning_amount'] += amount      
-                    elif event.axis == 4:
+                    if event.axis == 4:
                         input_move = self.controller.get_axis(4)
-                        amount = movement_scaler(input_move, 0.2)
-                        move_up(amount)
+                        amount = self.movement_scaler(input_move, 0.2)
+                        self.move_up(amount)
                         self.list_movements['up_motor'] += amount
                     
             scree.fill((0,0,0))

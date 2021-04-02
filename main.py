@@ -8,7 +8,6 @@ from threading import Thread
 import time
 import sys
 from camera import Camera
-from interface import Interface
 from controls import Control
 matplotlib.use("TkAgg")
 import matplotlib.pyplot as plt
