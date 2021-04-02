@@ -117,16 +117,16 @@ class Control():
                     if event.axis == 0:
                         if amount<0:
                             move_left(amount)
-                            self.list_movement['left_motor_left'] = abs(amount)
+                            self.list_movement['left_motor_left'] += abs(amount)
                         else:
                             move_right(amount)
-                            self.list_movement['left_motor_right'] = amount
+                            self.list_movement['left_motor_right'] += amount
                     elif event.axis == 3:
                         move_turn(amount)
-                        self.list_movements['turning_amount'] = amount      
+                        self.list_movements['turning_amount'] += amount      
                     elif event.axis == 4:
                         move_up(amount)
-                        self.list_movements['up_motor'] = amount
+                        self.list_movements['up_motor'] += amount
                     
             scree.fill((0,0,0))
             pygame.display.update()
