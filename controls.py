@@ -103,8 +103,6 @@ class Control():
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
                     running = False
-                input_move = event.value
-                amount = movement_scaler(input_move, 0.2)
                 elif event.type == pygame.JOYAXISMOTION:
                     if event.axis == 0:
                         input_move = event.get_axis(0)
