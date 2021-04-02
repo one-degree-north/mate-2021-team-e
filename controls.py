@@ -29,6 +29,8 @@ class Control():
         
         #Initializes the joystick being used, which is the XBox Controller
         pygame.init()
+        (width, height) = (500,500)
+        scree = pygame.display.set_mode((width, height))
         joysticks = []
         joystick_count = pygame.joystick.get_count()
         if joystick_count == 0:
@@ -53,7 +55,6 @@ class Control():
 
             self.left_joystick = (self.movement_scaler(controller.get_axis(0)), self.movement_scaler(controller.get_axis(2)))
             self.right_joystick = (self.movement_scaler(controller.get_axis(1)), self.movement_scaler(controller.get_axis(3)))
-            self.clock = clock
 
             self.serial_port = serial_port
 
@@ -100,20 +101,19 @@ class Control():
     #Starts controls and sets up event responses to control movements on the controller
     def controls_move(self):
         self.running = True
-        while running:
+        pygame.init()
+        (width, height) = (500,500)
+        scree = pygame.display.set_mode((width, height))
+        while self.running:
             claw_movement = 99
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
                     running = False
-                #The buttons are used to control the leftward, rightward, and other motions of the claw. 
-                #These have not been considered yet since the claw and its motor have not been mounted. 
-                #I took the code for the claws out since we are not using those buttons yet
-                #The joy axes are used to control the motion of the robot forward, leftward, rightward, and to allow the robot to turn as well. 
-                #The axis labelled 0 is used for left to right motion and is located on the left joystick. 
-                #The axis labelled 4 is used for up to right motion and is located on the right joystick.
+                input_move = event.value
+                amount = movement_scaler(input_move, 0.2)
                 elif event.type == pygame.JOYAXISMOTION:
-                    input = event.value
-                    amount = movement_scaler(input, 0.2)
+                    input_move = event.value
+                    amount = movement_scaler(input_move, 0.2)
                     if event.axis == 0:
                         if amount<0:
                             move_left(amount)
@@ -127,7 +127,10 @@ class Control():
                     elif event.axis == 4:
                         move_up(amount)
                         self.list_movements['up_motor'] = amount
+                    
+            scree.fill((0,0,0))
+            pygame.display.update()
     #Stops the controller by setting self.running to false                   
     def stop():
         self.running = False
-        
+        print(self.list_movements)
