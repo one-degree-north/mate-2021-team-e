@@ -39,7 +39,7 @@ if __name__ == '__main__':
     camera.open(gstreamer_pipeline(sensor_id=0, sensor_mode=3, flip_method=0, display_height=600, display_width=600))
     camera.start()
     clocks = pygame.time.Clock()
-    controller = Control(100,0.1,clocks, "/dev/ttyUSB0", 9600)
+    controller = Control(100,0.1,clocks, "/dev/ttyUSB0", 115200)
     #interface = Interface(robot=controller.list_movements, object_seen=True, motor_controls=True, clock=clocks)
     #interface.make_interface() 
     try:
