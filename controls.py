@@ -103,7 +103,7 @@ class Control():
         self.printer(msg2)
     #Turns the robot in some direction with the power output provided    
     def move_turn(self, quantity):
-        quan = int(quan*300)
+        quan = int(quan*300) 
     def move_turn(self, quantity):
         quan = int(quantity*300)
         msg1 = "" + str(self._RIGHT_MOTOR) + "\n" + str(quan) + "\n"
@@ -154,4 +154,3 @@ class Control():
     def stop():
         self.running = False
         print(self.list_movements)
-
