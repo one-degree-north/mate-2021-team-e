@@ -53,8 +53,8 @@ if __name__ == '__main__':
     if not camera.video_capture.isOpened():
         print("Start Cameras")
         SystemExit(0)
-    thread = Thread(target=interface.update_interface, args=((600,600),camera_pictures))
-    thread.start()
+    #thread = Thread(target=interface.update_interface, args=((600,600),camera_pictures))
+    #thread.start()
     while controller.running:
         #Put interface update here
         _, camera_picture = camera.read()
