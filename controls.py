@@ -124,7 +124,7 @@ class Control():
                 if event.type == pygame.QUIT:
                     running = False
                 if event.type == pygame.JOYAXISMOTION:
-                    if event.axis == 0:
+                    if event.axis == 2:
                         input_move = self.controller.get_axis(0)
                         amount = self.movement_scaler(input_move, 0.2)
                         if amount<0:
@@ -136,14 +136,18 @@ class Control():
                     if event.axis == 3:
                         input_move = self.controller.get_axis(3)
                         amount = self.movement_scaler(input_move, 0.2)
-                        self.move_turn(amount)
+                        self.move_forward(amount)
                         self.list_movements['turning_amount'] += amount      
-                    if event.axis == 4:
+                    if event.axis == 1:
                         input_move = self.controller.get_axis(4)
                         amount = self.movement_scaler(input_move, 0.2)
                         self.move_up(amount)
                         self.list_movements['up_motor'] += amount
-                    if event.axi
+                if event.type == pygame.JOYBUTTONDOWN:
+                    if event.button == 7:
+                        claw_use(0)
+                    if event.button == 6:
+                        claw_use(180)
             scree.fill((0,0,0))
             pygame.display.update()
     #Stops the controller by setting self.running to false                   
