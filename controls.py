@@ -84,7 +84,7 @@ class Control():
         quan = int(quantity*300)
         msg = "" + str(self._LEFT_MOTOR) + "\n" + str(quan) + "\n"
         self.printer(msg)
-    def claw_use(val):
+    def claw_use(self, quantity):
         quan = int(quantity*300)
         msg = "" + str.(self._CLAW_MOTOR) + "\n" + str(quan) + "\n"
         self.printer(msg)
