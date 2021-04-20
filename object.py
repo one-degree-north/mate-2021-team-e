@@ -1,3 +1,10 @@
+import pygame
+import serial
+import sympy
+import numpy
+import matplotlib
+import PySimpleGUI as sg
+import time
 import cv2
 import numpy as np
 import imutils
@@ -9,8 +16,8 @@ while True:
   lines = picture_lines("/Users/nityaarora/Downloads/picture.png")
   lines_video = picture_lines(picture_video)
   region_place_part = region_place(lines, lines_video)
-  draw_picture("/Users/nityaarora/Downloads/picture.png", region_place_part[0], region_place_part[1], region_place_part[2], region_place_part[3])
-
+  draw_picture("~/Downloads/picture.png", region_place_part[0], region_place_part[1], region_place_part[2], region_place_part[3])
+  
   
   
 def picture_lines(pictures):
@@ -41,11 +48,20 @@ def picture_lines(pictures):
                     if(full_part[i][j][0][0] == reds_part[k][m][0][0] and full_part[i][j][0][1] == reds_part[k][m][0][1]):
                         full.remove(full_part[i][j])
     return ([full_part, reds_part, full])
+  
+  
+  
 def draw_picture(picture, lines_repair, lines_unhealthy, lines_growth, lines_damage):
-    picture_lines_repair = cv2.drawContours(picture, lines_repair, -1, (255,0,0), 3)
-    picture_lines_unhealthy = cv2.drawContours(picture, lines_unhealthy, -1, (0,255,0), 3)
-    picture_lines_growth = cv2.drawContours(picture, lines_growth, -1, (0,0,255), 3)
-    picture_lines_damage = cv2.drawContours(picture, lines_damage, -1, (127,127,127), 3)
+  
+    picture_lines_repair, repair_hierarchy = cv2.drawContours(picture, lines_repair, -1, (255,0,0), 3)
+    picture_lines_unhealthy, un_hierarchy = cv2.drawContours(picture, lines_unhealthy, -1, (0,255,0), 3)
+    picture_lines_growth, growth_hierarchy = cv2.drawContours(picture, lines_growth, -1, (0,0,255), 3)
+    picture_lines_damage, damage_hierarchy = cv2.drawContours(picture, lines_damage, -1, (127,127,127), 3)
+    draw_rectangles(picture, picture_lines_repair, repair_hierarchy) 
+    draw_rectangles(picture, picture_lines_unhealthy, un_hierarchy) 
+    draw_rectangles(picture, picture_lines_growth, growth_hierarchy) 
+    draw_rectangles(picture, picture_lines_damage, damage_hierarchy)
+    
     cv2.imshow('picture_show', picture)
 
 def region_place(lines, lines_shown):
@@ -76,72 +92,21 @@ def region_place(lines, lines_shown):
                     if(lines[2][i][j][0][0] not in lines_shown[2][k][m][0][0] and lines[2][i][j][0][1] not in lines_shown[2][k][m][0][1]):
                         damage.append(lines[2][i][j][0])
     return([repair, unhealthy, growth, damage])
-
-                        
-                        
-     
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+ 
+
+def draw_rectangles(picture, contours, hierarchy):
+  
+  
+  
+  height, width, _ = picture.shape
+  min_x, min_y = width, height
+  max_x = max_y = 0
+  for contour, hier in zip(contours, hier):
+      (x,y,w,h) = cv2.boundingRect(contour)
+      min_x, max_x = min(x, min_x), max(x+w, max_x)
+      min_y, max_y = min(y, min_y), max(y+h, max_y)
+      if w > 80 and h > 80:
+          cv2.rectangle(picture, (x,y), (x+w,y+h), (255, 0, 0), 2)
+
+  if max_x - min_x > 0 and max_y - min_y > 0:
+      cv2.rectangle(picture, (min_x, min_y), (max_x, max_y), (255, 0, 0), 2)
