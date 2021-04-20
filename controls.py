@@ -10,8 +10,8 @@ class Control():
     #Creates variables that store the motor labels for the different motors used. Some motor values have also been put in for adjustments that may be made to add the claw          
 
     def __init__(self, scale, adjustment, clock, serial_port, serial_baudrate):
-        self._CENTRAL_MOTOR = 1
-        self._RIGHT_MOTOR = 2
+        self._CENTRAL_MOTOR = 2
+        self._RIGHT_MOTOR = 1
         self._LEFT_MOTOR = 3
         self.scale = scale 
         self.adjustment = adjustment
@@ -67,42 +67,42 @@ class Control():
                 return  (raw+self.adjustment)/1.0       
                
     #Correctly encodes the strings that are used to send quantities in order to send them to serial
-    def printer(information):
-        quantity = int(quantity*300)
-        ser.write(information.encode('latin'))
+    def printer(self, information):
+        #quan = int(quantity*300)
+        self.ser.write(information.encode('latin'))
         
     #Moves the robot upward by putting the central motor on higher output
     def move_up(self, quantity):
-        quantity = int(quantity*300)
-        msg = "" + str(self._CENTRAL_MOTOR) + "\n" + str(quantity) + "\n")
+        quan = int(quantity*300)
+        msg = "" + str(self._CENTRAL_MOTOR) + "\n" + str(quan) + "\n"
         self.printer(msg)
         
     #Moves the robot leftward by putting the left motor on higher output
     def move_left(self, quantity):
-        quantity = int(quantity*300)
-        msg = "" + str(self._LEFT_MOTOR) + "\n" + str(quantity) + "\n")
+        quan = int(quantity*300)
+        msg = "" + str(self._LEFT_MOTOR) + "\n" + str(quan) + "\n"
         self.printer(msg)
         
     #Moves the robot rightward by putting the right motor on higher output
     def move_right(self, quantity):
-        quantity = int(quantity*300)
-        msg = "" + str(self._RIGHT_MOTOR) +  "\n" + str(quantity) + "\n")
+        quan = int(quantity*300)
+        msg = "" + str(self._RIGHT_MOTOR) +  "\n" + str(quan) + "\n"
         self.printer(msg)
         
     #Moves the robot to the front by putting the right motor and the left motor on higher output
     def move_front(self, quantity):
-        quantity = int(quantity*300)
-        msg1 = "" + str(self._RIGHT_MOTOR) + "\n" + str(quantity) + "\n")
-        msg2 = "" + str(self._LEFT_MOTOR) + "\n" + str(quantity) + "\n")
+        quan = int(quantity*300)
+        msg1 = "" + str(self._RIGHT_MOTOR) + "\n" + str(quan) + "\n"
+        msg2 = "" + str(self._LEFT_MOTOR) + "\n" + str(quan) + "\n"
         self.printer(msg1)
         self.printer(msg2)
     #Turns the robot in some direction with the power output provided    
     def move_turn(self, quantity):
-        quantity = int(quantity*300)
+        quan = int(quan*300)
     def move_turn(self, quantity):
-        quantity = int(quantity*300)
-        msg1 = "" + str(self._RIGHT_MOTOR) + "\n" + str(quantity) + "\n")
-        msg2 = "" + str(self._LEFT_MOTOR) + "\n" + str(-1*quantity) + "\n")
+        quan = int(quantity*300)
+        msg1 = "" + str(self._RIGHT_MOTOR) + "\n" + str(quan) + "\n"
+        msg2 = "" + str(self._LEFT_MOTOR) + "\n" + str(-1*quan) + "\n"
         self.printer(msg1)
         self.printer(msg2)
        
@@ -124,7 +124,7 @@ class Control():
                         amount = self.movement_scaler(input_move, 0.2)
                         if amount<0:
                             self.move_left(amount)
-                            self.list_movements['left_motor_left'] += abs(amount)
+                            self.list_movements['left_motor_right'] += abs(amount)
                         else:
                             self.move_right(amount)
                             self.list_movements['left_motor_right'] += amount
@@ -145,3 +145,4 @@ class Control():
     def stop():
         self.running = False
         print(self.list_movements)
+
