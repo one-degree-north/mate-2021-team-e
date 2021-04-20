@@ -13,6 +13,7 @@ class Control():
         self._CENTRAL_MOTOR = 2
         self._RIGHT_MOTOR = 1
         self._LEFT_MOTOR = 3
+        self._CLAW_MOTOR = 4
         self.scale = scale 
         self.adjustment = adjustment
         self.running = False
@@ -70,7 +71,8 @@ class Control():
     def printer(self, information):
         #quan = int(quantity*300)
         self.ser.write(information.encode('latin'))
-        
+
+  
     #Moves the robot upward by putting the central motor on higher output
     def move_up(self, quantity):
         quan = int(quantity*300)
@@ -82,7 +84,10 @@ class Control():
         quan = int(quantity*300)
         msg = "" + str(self._LEFT_MOTOR) + "\n" + str(quan) + "\n"
         self.printer(msg)
-        
+    def claw_use(val):
+        quan = int(quantity*300)
+        msg = "" + str.(self._CLAW_MOTOR) + "\n" + str(quan) + "\n"
+        self.printer(msg)
     #Moves the robot rightward by putting the right motor on higher output
     def move_right(self, quantity):
         quan = int(quantity*300)
@@ -138,7 +143,7 @@ class Control():
                         amount = self.movement_scaler(input_move, 0.2)
                         self.move_up(amount)
                         self.list_movements['up_motor'] += amount
-                    
+                    if event.axi
             scree.fill((0,0,0))
             pygame.display.update()
     #Stops the controller by setting self.running to false                   
