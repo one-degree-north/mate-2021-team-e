@@ -31,7 +31,7 @@ class Control():
         #Initializes the joystick being used, which is the XBox Controller
         pygame.init()
         (width, height) = (500,500)
-        scree = pygame.display.set_mode((width, height))
+        self.scree = pygame.display.set_mode((width, height))
         joysticks = []
         joystick_count = pygame.joystick.get_count()
         if joystick_count == 0:
@@ -124,7 +124,7 @@ class Control():
                 if event.type == pygame.QUIT:
                     running = False
                 if event.type == pygame.JOYAXISMOTION:
-                    if event.axis == 2:
+                    if event.axis == 0:
                         input_move = self.controller.get_axis(0)
                         amount = self.movement_scaler(input_move, 0.2)
                         if amount<0:
@@ -133,22 +133,23 @@ class Control():
                         else:
                             self.move_right(amount)
                             self.list_movements['left_motor_right'] += amount
-                    if event.axis == 3:
-                        input_move = self.controller.get_axis(3)
-                        amount = self.movement_scaler(input_move, 0.2)
-                        self.move_forward(amount)
-                        self.list_movements['turning_amount'] += amount      
-                    if event.axis == 1:
+                    if event.axis == 4:
                         input_move = self.controller.get_axis(4)
+                        amount = self.movement_scaler(input_move, 0.2)
+                        self.move_front(amount)
+                        self.list_movements['turning_amount'] += amount 
+                    if event.axis == 5:
+                        input_move = self.controller.get_axis(5)
                         amount = self.movement_scaler(input_move, 0.2)
                         self.move_up(amount)
                         self.list_movements['up_motor'] += amount
                 if event.type == pygame.JOYBUTTONDOWN:
-                    if event.button == 7:
+                    if event.button == 0:
                         claw_use(0)
-                    if event.button == 6:
+                    if event.button == 3:
                         claw_use(180)
-            scree.fill((0,0,0))
+                    
+            self.scree.fill((0,0,0))
             pygame.display.update()
     #Stops the controller by setting self.running to false                   
     def stop():
