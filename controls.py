@@ -85,7 +85,7 @@ class Control():
         msg = "" + str(self._LEFT_MOTOR) + "\n" + str(quan) + "\n"
         self.printer(msg)
     def claw_use(self, quantity):
-        quan = int(quantity*300)
+        quan = int(quantity)
         msg = "" + str(self._CLAW_MOTOR) + "\n" + str(quan) + "\n"
         self.printer(msg)
     #Moves the robot rightward by putting the right motor on higher output
